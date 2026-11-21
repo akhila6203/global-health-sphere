@@ -19,50 +19,92 @@ import { categories } from "../data/categories";
 import { countries } from "../data/countries";
 import logo from "../assets/global-health-sphere-logo.png";
 
+/* --------------------------------------------------
+   INTERNATIONAL LANGUAGES
+-------------------------------------------------- */
+
 const languages = [
   { value: "en", label: "English" },
-  { value: "hi", label: "हिन्दी" },
-  { value: "te", label: "తెలుగు" },
-  { value: "fr", label: "Français" },
-  { value: "es", label: "Español" },
+  { value: "hi", label: "Hindi" },
+  { value: "te", label: "Telugu" },
+  { value: "ta", label: "Tamil" },
+  { value: "kn", label: "Kannada" },
+  { value: "ml", label: "Malayalam" },
+  { value: "bn", label: "Bengali" },
+  { value: "mr", label: "Marathi" },
+  { value: "gu", label: "Gujarati" },
+  { value: "pa", label: "Punjabi" },
+  { value: "ur", label: "Urdu" },
+  { value: "ar", label: "Arabic" },
+  { value: "fr", label: "French" },
+  { value: "es", label: "Spanish" },
+  { value: "pt", label: "Portuguese" },
+  { value: "de", label: "German" },
+  { value: "it", label: "Italian" },
+  { value: "ru", label: "Russian" },
+  { value: "zh", label: "Chinese" },
+  { value: "ja", label: "Japanese" },
+  { value: "ko", label: "Korean" },
+  { value: "id", label: "Indonesian" },
+  { value: "sw", label: "Swahili" },
+  { value: "tr", label: "Turkish" },
+  { value: "th", label: "Thai" },
+  { value: "vi", label: "Vietnamese" },
+  { value: "nl", label: "Dutch" },
 ];
 
+/* --------------------------------------------------
+   COMMON NAVIGATION STYLES
+-------------------------------------------------- */
 const navStyle =
-  "inline-flex h-full items-center gap-1.5 whitespace-nowrap text-[14px] font-bold transition-colors duration-200";
+  "inline-flex h-full items-center gap-1 whitespace-nowrap text-[16px] min-[1400px]:text-[17px] min-[1600px]:text-[18px] font-bold transition-colors duration-200";
+  
+const dropdownItemStyle =
+  "flex min-h-[52px] items-center gap-3 rounded-lg px-3 py-2.5 text-[16px] min-[1400px]:text-[17px] min-[1600px]:text-[18px] font-semibold text-[#263b5b] transition hover:bg-[#eff8f7] hover:text-[#079da7]";
+
+/* --------------------------------------------------
+   MEGA DROPDOWN
+-------------------------------------------------- */
 
 function MegaMenu({ type, closeMenu }) {
   const isTopics = type === "topics";
   const items = isTopics ? categories : countries;
 
+  // Maximum five rows; remaining items move into new columns.
+  const rowCount = Math.min(5, items.length);
+
   return (
-    <div className="absolute left-1/2 top-full z-[80] w-screen -translate-x-1/2 border-t border-[#e5edf1] bg-white shadow-[0_18px_35px_rgba(15,42,82,0.14)]">
-      <div className="mx-auto max-w-[1400px] px-6 py-6 lg:px-10">
+    <div
+      className="
+        absolute
+        left-0
+        top-full
+        z-[100]
+        w-max
+        max-w-[calc(100vw-24px)]
+        translate-x-0
+        rounded-b-xl
+        border-t-2
+        border-[#079da7]
+        bg-white
+        shadow-[0_15px_35px_rgba(15,42,82,0.15)]
+      "
+      role="region"
+    >
+      <div className="max-h-[75vh] max-w-[calc(100vw-24px)] overflow-auto p-4 lg:p-5">
 
-        <div className="mb-5 flex items-center justify-between border-b border-[#e9eff2] pb-4">
-          <div>
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#079da7]">
-              {isTopics
-                ? "Explore our health library"
-                : "Healthcare around the world"}
-            </p>
-
-            <h3 className="mt-1 text-lg font-extrabold text-[#123c8c]">
-              {isTopics ? "Health Topics" : "Country Health Hubs"}
-            </h3>
-          </div>
-
-          <Link
-            to={isTopics ? "/health/" : "/countries/"}
-            onClick={closeMenu}
-            className="rounded-lg bg-[#eaf6f5] px-4 py-2 text-xs font-bold text-[#087f89] hover:bg-[#d8efeb]"
-          >
-            View All →
-          </Link>
-        </div>
-
-        {/* Five items per column */}
-        <div className="grid grid-flow-col auto-cols-[minmax(190px,1fr)] grid-rows-5 gap-x-5 gap-y-2 overflow-x-auto">
-
+        <div
+          className="
+            grid
+            grid-flow-col
+            gap-x-2
+            gap-y-1
+          "
+          style={{
+            gridTemplateRows: `repeat(${rowCount}, minmax(54px, auto))`,
+            gridAutoColumns: "max-content",
+          }}
+        >
           {items.map((item) => {
             const Icon = item.icon;
 
@@ -75,40 +117,53 @@ function MegaMenu({ type, closeMenu }) {
                     : `/countries/${item.slug}/`
                 }
                 onClick={closeMenu}
-                className="group flex min-h-[62px] items-start gap-3 rounded-xl border border-transparent px-3 py-2.5 transition hover:border-[#dcefee] hover:bg-[#f1f9f8]"
+                className="
+                  flex
+                  min-h-[54px]
+                  min-w-[250px]
+                  items-center
+                  gap-2
+                  whitespace-nowrap
+                  rounded-lg
+                  px-3
+                  py-2
+                  text-[16px]
+                  min-[1400px]:text-[17px]
+                  min-[1600px]:text-[18px]
+                  font-semibold
+                  text-[#263b5b]
+                  transition-colors
+                  hover:bg-[#eff8f7]
+                  hover:text-[#079da7]
+                "
               >
-                {isTopics ? (
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#e7f5f3] text-[#079da7] group-hover:bg-white">
-                    {Icon && <Icon sx={{ fontSize: 21 }} />}
-                  </span>
-                ) : (
-                  <span className="mt-0.5 text-2xl">
-                    {item.flag || "🌍"}
+                {isTopics && Icon && (
+                  <span className="
+                    flex h-9 w-9 shrink-0
+                    items-center justify-center
+                    rounded-lg bg-[#e9f6f4]
+                    text-[#079da7]
+                  ">
+                    <Icon sx={{ fontSize: 21 }} />
                   </span>
                 )}
 
-                <span className="min-w-0">
-                  <span className="block text-[13px] font-extrabold leading-5 text-[#203753] group-hover:text-[#079da7]">
-                    {item.title || item.name}
-                  </span>
-
-                  {isTopics && (
-                    <span className="mt-1 block text-[11px] leading-4 text-[#52647a]">
-                      {Array.isArray(item.subtopics)
-                        ? item.subtopics.join(" · ")
-                        : item.subtopics || ""}
-                    </span>
-                  )}
+                <span className="whitespace-nowrap">
+                  {item.title || item.name}
                 </span>
               </Link>
             );
           })}
-
         </div>
+
       </div>
     </div>
   );
 }
+
+/* --------------------------------------------------
+   HEADER COMPONENT
+-------------------------------------------------- */
 
 export default function Header() {
   const location = useLocation();
@@ -118,12 +173,18 @@ export default function Header() {
   const [search, setSearch] = useState("");
   const [activeDropdown, setActiveDropdown] = useState("");
   const [language, setLanguage] = useState("en");
+  const [languageOpen, setLanguageOpen] = useState(false);
+  
+
+  /* Close menus after navigation */
 
   useEffect(() => {
     setMobileOpen(false);
     setActiveDropdown("");
     setSearchOpen(false);
   }, [location.pathname]);
+
+  /* Prevent background scrolling */
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -132,6 +193,8 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  /* Escape key */
 
   useEffect(() => {
     const handleEscape = (event) => {
@@ -144,18 +207,27 @@ export default function Header() {
 
     window.addEventListener("keydown", handleEscape);
 
-    return () => window.removeEventListener("keydown", handleEscape);
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
   }, []);
 
-  const closeMobile = () => setMobileOpen(false);
+  const closeMobile = () => {
+    setMobileOpen(false);
+  };
+
+  /* Search */
 
   const submitSearch = (event) => {
     event.preventDefault();
 
     if (!search.trim()) return;
 
-    window.location.href = `/articles?q=${encodeURIComponent(search.trim())}`;
+    window.location.href =
+      `/articles?q=${encodeURIComponent(search.trim())}`;
   };
+
+  /* Navigation active style */
 
   const desktopLink = ({ isActive }) =>
     `${navStyle} ${
@@ -167,82 +239,188 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-white shadow-[0_3px_16px_rgba(15,42,82,0.07)]">
 
-      {/* TOP AWARENESS BAR */}
+      {/* ==========================================
+          TOP HEADER
+      ========================================== */}
+
       <div className="bg-[#123c8c] text-white">
-        <div className="mx-auto flex min-h-[38px] w-[calc(100%-2rem)] max-w-[1400px] items-center justify-between gap-3">
 
-          <div className="flex items-center gap-2 text-[11px] font-semibold sm:text-xs">
-            <HealthAndSafetyRoundedIcon sx={{ fontSize: 18 }} />
+        <div className="mx-auto flex min-h-[40px] w-[calc(100%-2rem)] max-w-[1400px] items-center justify-between gap-3">
 
-            <span>
+         <div className="
+  flex min-w-0 max-w-[55%] items-center gap-1.5
+  text-[13px]
+  sm:max-w-none sm:gap-2 sm:text-[14px]
+  min-[1400px]:text-[15px]
+  min-[1600px]:text-[16px]
+  font-semibold
+">
+
+            <HealthAndSafetyRoundedIcon
+              sx={{ fontSize: 20 }}
+            />
+
+            <span className="truncate">
+            <span className="sm:hidden">
+              Global Health Awareness
+            </span>
+
+            <span className="hidden sm:inline">
               Global Health Awareness | Knowledge for Healthier Communities
             </span>
+          </span>
+
           </div>
 
-          <div className="flex shrink-0 items-center gap-2">
+          {/* LANGUAGE SELECTOR */}
 
-            <span className="hidden items-center gap-1.5 text-xs font-semibold md:flex">
-              <PublicRoundedIcon sx={{ fontSize: 16 }} />
+          <div className="relative flex shrink-0 items-center gap-2">
+
+            <span className="hidden items-center gap-1.5 text-[13px] font-semibold md:flex">
+              <PublicRoundedIcon sx={{ fontSize: 17 }} />
               Global Perspectives
             </span>
 
             <span className="mx-1 hidden h-4 w-px bg-white/30 md:block" />
 
-            <LanguageRoundedIcon sx={{ fontSize: 17 }} />
+            
+<LanguageRoundedIcon sx={{ fontSize: 19 }} />
 
-            <select
-              aria-label="Select language"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="max-w-[105px] cursor-pointer border-0 bg-transparent py-1 text-[11px] font-bold text-white outline-none [color-scheme:dark]"
-            >
-              {languages.map((lang) => (
-                <option
-                  key={lang.value}
-                  value={lang.value}
-                  className="bg-white text-[#203753]"
-                >
-                  {lang.label}
-                </option>
-              ))}
-            </select>
+{/* CUSTOM LANGUAGE DROPDOWN */}
+
+<div className="relative">
+
+  <button
+    type="button"
+    onClick={() => setLanguageOpen(!languageOpen)}
+    aria-expanded={languageOpen}
+    className="
+      flex min-w-[120px] items-center justify-between
+      gap-2 rounded-md px-2 py-2
+      text-[13px] min-[1400px]:text-[15px]
+      font-semibold text-white
+      transition hover:bg-white/10
+    "
+  >
+    <span>
+      {languages.find((lang) => lang.value === language)?.label || "English"}
+    </span>
+
+    <KeyboardArrowDownRoundedIcon
+      sx={{
+        fontSize: 20,
+        transform: languageOpen ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform 200ms",
+      }}
+    />
+  </button>
+
+  {languageOpen && (
+    <div
+      className="
+        absolute right-0 top-full z-[200]
+mt-0
+       w-[175px] min-[1400px]:w-[190px]
+        max-w-[calc(100vw-24px)]
+        max-h-[65vh]
+        overflow-y-auto
+        overflow-x-hidden
+        rounded-xl
+        border border-[#e3ecee]
+        bg-white
+        p-2
+        shadow-[0_12px_30px_rgba(15,42,82,0.18)]
+        [scrollbar-width:none]
+        [&::-webkit-scrollbar]:hidden
+      "
+    >
+      {languages.map((lang) => (
+        <button
+          key={lang.value}
+          type="button"
+          onClick={() => {
+            setLanguage(lang.value);
+            setLanguageOpen(false);
+          }}
+          className={`
+            flex w-full items-center justify-between
+            rounded-lg px-4 py-3
+            text-left text-[15px]
+            font-semibold transition
+            ${
+              language === lang.value
+                ? "bg-[#e9f6f4] text-[#079da7]"
+                : "text-[#263b5b] hover:bg-[#eff8f7] hover:text-[#079da7]"
+            }
+          `}
+        >
+          {lang.label}
+
+          {language === lang.value && (
+            <span className="text-[#079da7]">✓</span>
+          )}
+        </button>
+      ))}
+    </div>
+  )}
+
+</div>
+
+
           </div>
         </div>
       </div>
 
-      {/* MAIN HEADER */}
-      <div className="mx-auto flex h-[78px] w-[calc(100%-2rem)] max-w-[1400px] items-center justify-between gap-4 lg:w-[calc(100%-4rem)] max-md:h-[68px]">
+      {/* ==========================================
+          MAIN HEADER
+      ========================================== */}
+
+      <div className="mx-auto flex h-[82px] w-[calc(100%-2rem)] max-w-[1400px] items-center justify-between gap-4 lg:w-[calc(100%-4rem)] max-md:h-[68px]">
 
         {/* LOGO */}
+
         <Link
           to="/"
-          className="flex w-[215px] shrink-0 items-center max-lg:w-[185px] max-md:w-[165px]"
+          className="flex w-[220px] shrink-0 items-center max-lg:w-[190px] max-md:w-[165px]"
         >
           <img
             src={logo}
             alt="Global Health Sphere"
-            className="h-[62px] w-full object-contain object-left max-md:h-[49px]"
+            className="h-[65px] w-full object-contain object-left max-md:h-[50px]"
           />
         </Link>
 
         {/* DESKTOP NAVIGATION */}
-        <nav className="hidden h-full flex-1 items-center justify-center gap-5 xl:flex">
+
+        <nav className="hidden h-full flex-1 items-center justify-center gap-5 min-[1400px]:gap-6 xl:flex">
+
+          {/* HOME ICON */}
 
           <NavLink
             to="/"
             end
             className={desktopLink}
             aria-label="Home"
+            title="Home"
           >
-            <HomeRoundedIcon sx={{ fontSize: 22 }} />
+            <HomeRoundedIcon
+              sx={{
+                fontSize: 24,
+                "@media (min-width: 1600px)": {
+                  fontSize: 30,
+                },
+              }}
+            />
           </NavLink>
 
           {/* HEALTH TOPICS */}
+
           <div
-            className="relative flex h-full items-center"
-            onMouseEnter={() => setActiveDropdown("topics")}
-            onMouseLeave={() => setActiveDropdown("")}
-          >
+  className="relative flex h-full items-center"
+  onMouseEnter={() => setActiveDropdown("topics")}
+  onMouseLeave={() => setActiveDropdown("")}
+>
+
             <button
               type="button"
               onClick={() =>
@@ -250,6 +428,7 @@ export default function Header() {
                   activeDropdown === "topics" ? "" : "topics"
                 )
               }
+              aria-expanded={activeDropdown === "topics"}
               className={`${navStyle} ${
                 activeDropdown === "topics"
                   ? "text-[#079da7]"
@@ -257,7 +436,10 @@ export default function Header() {
               }`}
             >
               Health Topics
-              <KeyboardArrowDownRoundedIcon sx={{ fontSize: 19 }} />
+
+              <KeyboardArrowDownRoundedIcon
+                sx={{ fontSize: 20 }}
+              />
             </button>
 
             {activeDropdown === "topics" && (
@@ -266,18 +448,26 @@ export default function Header() {
                 closeMenu={() => setActiveDropdown("")}
               />
             )}
+
           </div>
 
-          <NavLink to="/health-news/" className={desktopLink}>
+          {/* HEALTH NEWS */}
+
+          <NavLink
+            to="/health-news/"
+            className={desktopLink}
+          >
             Health News
           </NavLink>
 
           {/* COUNTRIES */}
+
           <div
-            className="relative flex h-full items-center"
-            onMouseEnter={() => setActiveDropdown("countries")}
-            onMouseLeave={() => setActiveDropdown("")}
-          >
+  className="relative flex h-full items-center"
+  onMouseEnter={() => setActiveDropdown("countries")}
+  onMouseLeave={() => setActiveDropdown("")}
+>
+
             <button
               type="button"
               onClick={() =>
@@ -285,6 +475,7 @@ export default function Header() {
                   activeDropdown === "countries" ? "" : "countries"
                 )
               }
+              aria-expanded={activeDropdown === "countries"}
               className={`${navStyle} ${
                 activeDropdown === "countries"
                   ? "text-[#079da7]"
@@ -292,7 +483,10 @@ export default function Header() {
               }`}
             >
               Countries
-              <KeyboardArrowDownRoundedIcon sx={{ fontSize: 19 }} />
+
+              <KeyboardArrowDownRoundedIcon
+                sx={{ fontSize: 20 }}
+              />
             </button>
 
             {activeDropdown === "countries" && (
@@ -301,22 +495,40 @@ export default function Header() {
                 closeMenu={() => setActiveDropdown("")}
               />
             )}
+
           </div>
 
-          <NavLink to="/doctors-opinions/" className={desktopLink}>
+          {/* DOCTORS */}
+
+          <NavLink
+            to="/doctors-opinions/"
+            className={desktopLink}
+          >
             Doctor's Opinions
           </NavLink>
 
-          <NavLink to="/medical-research/" className={desktopLink}>
+          {/* RESEARCH */}
+
+          <NavLink
+            to="/medical-research/"
+            className={desktopLink}
+          >
             Research
           </NavLink>
 
-          <NavLink to="/about/" className={desktopLink}>
+          {/* ABOUT */}
+
+          <NavLink
+            to="/about/"
+            className={desktopLink}
+          >
             About
           </NavLink>
+
         </nav>
 
-        {/* SEARCH AND MOBILE MENU BUTTONS */}
+        {/* SEARCH AND MOBILE MENU */}
+
         <div className="ml-auto flex shrink-0 items-center gap-2">
 
           <button
@@ -325,7 +537,14 @@ export default function Header() {
             aria-label="Search website"
             className="grid h-10 w-10 place-items-center rounded-full bg-[#edf7f7] text-[#123c8c] transition hover:bg-[#dcefee]"
           >
-            <SearchRoundedIcon />
+            <SearchRoundedIcon
+              sx={{
+                fontSize: 24,
+                "@media (min-width: 1600px)": {
+                  fontSize: 28,
+                },
+              }}
+            />
           </button>
 
           <button
@@ -337,44 +556,102 @@ export default function Header() {
           >
             <MenuRoundedIcon />
           </button>
+
         </div>
       </div>
 
-      {/* SEARCH PANEL */}
-      {searchOpen && (
-        <div className="border-t border-[#e9eff2] bg-white px-4 py-4">
-          <form
-            onSubmit={submitSearch}
-            className="mx-auto flex max-w-3xl items-center gap-3 rounded-xl border border-[#dfe9ee] p-2"
-          >
-            <SearchRoundedIcon className="text-[#123c8c]" />
+      {/* ==========================================
+          SEARCH PANEL
+      ========================================== */}
 
-            <input
-              type="search"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search health topics, articles and countries..."
-              className="min-w-0 flex-1 border-0 bg-transparent px-2 py-2 text-sm text-[#172a43] outline-none"
-            />
+     
+{/* SEARCH PANEL */}
 
-            <button
-              type="submit"
-              className="rounded-lg bg-[#123c8c] px-5 py-2 text-sm font-bold text-white hover:bg-[#079da7]"
-            >
-              Search
-            </button>
-          </form>
-        </div>
-      )}
+{searchOpen && (
+  <div className="
+    border-t border-[#e9eff2]
+    bg-white
+    px-3
+    py-2
+    animate-in
+    slide-in-from-top-1
+    duration-200
+  ">
 
-      {/* MOBILE RIGHT SIDE DRAWER */}
+    <form
+      onSubmit={submitSearch}
+      className="
+        mx-auto
+        flex
+        max-w-3xl
+        items-center
+        gap-2
+        rounded-lg
+        border
+        border-[#dfe9ee]
+        px-2
+        py-1
+      "
+    >
+
+      <SearchRoundedIcon
+        sx={{ fontSize: 21 }}
+        className="shrink-0 text-[#123c8c]"
+      />
+
+      <input
+        type="search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search health topics, articles and countries..."
+        className="
+          min-w-0
+          flex-1
+          border-0
+          bg-transparent
+          px-2
+          py-1
+          text-[16px]
+          text-[#172a43]
+          outline-none
+        "
+      />
+
+      <button
+        type="submit"
+        className="
+          rounded-md
+          bg-[#123c8c]
+          px-4
+          py-1.5
+          text-[15px]
+          font-bold
+          text-white
+          transition
+          hover:bg-[#079da7]
+        "
+      >
+        Search
+      </button>
+
+    </form>
+  </div>
+)}
+
+      {/* ==========================================
+          MOBILE RIGHT SIDE DRAWER
+      ========================================== */}
+
       <div
         className={`fixed inset-0 z-[100] xl:hidden ${
-          mobileOpen ? "visible" : "invisible pointer-events-none"
+          mobileOpen
+            ? "visible"
+            : "invisible pointer-events-none"
         }`}
       >
 
         {/* BACKDROP */}
+
         <button
           type="button"
           aria-label="Close menu"
@@ -384,14 +661,18 @@ export default function Header() {
           }`}
         />
 
-        {/* DRAWER */}
+        {/* RIGHT DRAWER */}
+
         <aside
           className={`absolute right-0 top-0 flex h-full w-[min(88vw,400px)] flex-col border-l-4 border-[#079da7] bg-white shadow-[-15px_0_40px_rgba(5,25,55,0.2)] transition-transform duration-300 ease-in-out ${
-            mobileOpen ? "translate-x-0" : "translate-x-full"
+            mobileOpen
+              ? "translate-x-0"
+              : "translate-x-full"
           }`}
         >
 
           {/* DRAWER HEADER */}
+
           <div className="flex min-h-[76px] items-center justify-between border-b border-[#e9eff2] px-5">
 
             <Link to="/" onClick={closeMobile}>
@@ -406,42 +687,54 @@ export default function Header() {
               type="button"
               onClick={closeMobile}
               aria-label="Close navigation"
-              className="grid h-10 w-10 place-items-center rounded-full bg-[#edf7f7] text-[#123c8c] hover:bg-[#dcefee]"
+              className="grid h-10 w-10 place-items-center rounded-full bg-[#edf7f7] text-[#123c8c]"
             >
               <CloseRoundedIcon />
             </button>
+
           </div>
 
-          {/* DRAWER LINKS */}
-          <div className="flex-1 overflow-y-auto px-5 py-5">
+          {/* MOBILE NAVIGATION */}
 
-            <p className="mb-4 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#079da7]">
-              Explore Global Health Sphere
-            </p>
+          <div className="flex-1 overflow-y-auto px-5 py-3">
 
             <nav className="flex flex-col">
+
+              {/* HOME */}
 
               <NavLink
                 to="/"
                 end
                 onClick={closeMobile}
-                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-sm font-bold text-[#263b5b] hover:text-[#079da7]"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 border-b border-[#edf1f3] py-4 text-[16px] font-bold ${
+                    isActive
+                      ? "text-[#079da7]"
+                      : "text-[#263b5b]"
+                  }`
+                }
               >
-                <HomeRoundedIcon /> Home
+                <HomeRoundedIcon />
+                Home
               </NavLink>
 
-              {/* MOBILE HEALTH TOPICS */}
+              {/* HEALTH TOPICS */}
+
               <details className="group border-b border-[#edf1f3]">
-                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-bold text-[#263b5b]">
+
+                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-[16px] font-bold text-[#263b5b]">
+
                   <span className="flex items-center gap-3">
                     <HealthAndSafetyRoundedIcon />
                     Health Topics
                   </span>
 
                   <KeyboardArrowDownRoundedIcon className="transition group-open:rotate-180" />
+
                 </summary>
 
                 <div className="grid grid-cols-1 gap-1 pb-3 pl-2">
+
                   {categories.map((item) => {
                     const Icon = item.icon;
 
@@ -450,102 +743,106 @@ export default function Header() {
                         key={item.slug}
                         to={`/${item.slug}/`}
                         onClick={closeMobile}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold text-[#52647a] hover:bg-[#eff8f8] hover:text-[#087f89]"
+                        className="flex items-center gap-3 rounded-lg px-3 py-3 text-[16px] font-semibold text-[#263b5b] hover:bg-[#eff8f8] hover:text-[#087f89]"
                       >
-                        {Icon && <Icon sx={{ fontSize: 19 }} />}
+                        {Icon && <Icon sx={{ fontSize: 20 }} />}
+
                         {item.title}
                       </Link>
                     );
                   })}
+
                 </div>
               </details>
+
+              {/* HEALTH NEWS */}
 
               <NavLink
                 to="/health-news/"
                 onClick={closeMobile}
-                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-sm font-bold text-[#263b5b] hover:text-[#079da7]"
+                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-[16px] font-bold text-[#263b5b] hover:text-[#079da7]"
               >
                 <ArticleOutlinedIcon />
-                Health News & Updates
+                Health News
               </NavLink>
 
-              {/* MOBILE COUNTRIES */}
+              {/* COUNTRIES */}
+
               <details className="group border-b border-[#edf1f3]">
-                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-sm font-bold text-[#263b5b]">
+
+                <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-[16px] font-bold text-[#263b5b]">
+
                   <span className="flex items-center gap-3">
                     <PublicRoundedIcon />
                     Countries
                   </span>
 
                   <KeyboardArrowDownRoundedIcon className="transition group-open:rotate-180" />
+
                 </summary>
 
                 <div className="grid grid-cols-1 gap-1 pb-3 pl-2">
+
                   {countries.map((item) => (
                     <Link
                       key={item.slug}
                       to={`/countries/${item.slug}/`}
                       onClick={closeMobile}
-                      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-xs font-semibold text-[#52647a] hover:bg-[#eff8f8] hover:text-[#087f89]"
+                      className="flex items-center gap-3 rounded-lg px-3 py-3 text-[16px] font-semibold text-[#263b5b] hover:bg-[#eff8f8] hover:text-[#087f89]"
                     >
-                      <span className="text-lg">{item.flag || "🌍"}</span>
+                      <span className="text-lg">
+                        {item.flag || "🌍"}
+                      </span>
+
                       {item.name}
                     </Link>
                   ))}
+
                 </div>
               </details>
+
+              {/* DOCTORS */}
 
               <NavLink
                 to="/doctors-opinions/"
                 onClick={closeMobile}
-                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-sm font-bold text-[#263b5b] hover:text-[#079da7]"
+                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-[16px] font-bold text-[#263b5b] hover:text-[#079da7]"
               >
                 <MedicalInformationOutlinedIcon />
                 Doctor's Opinions
               </NavLink>
 
+              {/* RESEARCH */}
+
               <NavLink
                 to="/medical-research/"
                 onClick={closeMobile}
-                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-sm font-bold text-[#263b5b] hover:text-[#079da7]"
+                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-[16px] font-bold text-[#263b5b] hover:text-[#079da7]"
               >
                 <ScienceOutlinedIcon />
                 Medical Research & Innovation
               </NavLink>
 
+              {/* ABOUT */}
+
               <NavLink
                 to="/about/"
                 onClick={closeMobile}
-                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-sm font-bold text-[#263b5b] hover:text-[#079da7]"
+                className="flex items-center gap-3 border-b border-[#edf1f3] py-4 text-[16px] font-bold text-[#263b5b] hover:text-[#079da7]"
               >
                 <InfoOutlinedIcon />
-                About Us
+                About
               </NavLink>
 
             </nav>
           </div>
 
-          {/* DRAWER FOOTER */}
-          <div className="border-t border-[#e9eff2] bg-[#f3f9f8] px-5 py-5">
-            <p className="text-sm font-extrabold text-[#123c8c]">
-              Health Knowledge. Global Perspectives.
-            </p>
-
-            <p className="mt-1 text-xs text-[#52647a]">
-              Awareness • Research • Health for All
-            </p>
-          </div>
         </aside>
       </div>
+
     </header>
   );
 }
-
-
-
-
-
-
 
 
 
