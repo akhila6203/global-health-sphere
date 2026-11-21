@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-size: 16px;
+  }
+
+  body {
+    @apply m-0 antialiased text-[#172a43] bg-white;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-extrabold tracking-tight text-[#123c8c] text-center;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.2;
+  }
+
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-xl md:text-2xl; }
+
+  p, li, label, input, textarea, select, button {
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  p {
+    @apply text-[#172a43];
+    font-size: 1em;
+    line-height: 1.75;
+  }
+
+  a { @apply no-underline; }
+  button, input, select, textarea { font: inherit; }
+  img { @apply max-w-full; }
+
+  @media (min-width: 1550px) {
+    html { font-size: 20px; }
+  }
+  @media (min-width: 1200px) and (max-width: 1549px) {
+    html { font-size: 18px; }
+  }
+  @media (min-width: 561px) and (max-width: 1199px) {
+    html { font-size: 17px; }
+  }
+  @media (max-width: 560px) {
+    html { font-size: 16px; }
+  }
+}
