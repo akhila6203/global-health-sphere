@@ -6,7 +6,10 @@ export const articles = [
     title: "Diabetes Symptoms: Early Signs and Risk Factors",
     category: "Heart & Diabetes",
     categorySlug: "heart-diabetes",
+    categorySlugs: ["heart-diabetes", "diseases"],
     country: "Global",
+    sourceTypes: ["Global", "Public", "Sourced"],
+    tags: ["Diabetes", "Symptoms", "Risk factors", "Diagnosis", "Blood sugar", "Healthy living", "Preventive care"],
     format: "Patient Awareness",
     date: "November 21, 2026",
     readTime: "8 min read",
@@ -84,7 +87,7 @@ export const articles = [
   },
   {
     id: 1, slug: "everyday-habits-for-heart-health", title: "Everyday Habits That Can Support Long-Term Heart Health",
-    category: "Heart & Diabetes", categorySlug: "heart-diabetes", country: "Global", format: "Health Explainer",
+    category: "Heart & Diabetes", categorySlug: "heart-diabetes", categorySlugs: ["heart-diabetes", "health-wellness"], country: "Global", sourceTypes: ["Global"], tags: ["Heart health", "Cardiovascular health", "Healthy living", "Lifestyle", "Sleep", "Preventive care"], format: "Health Explainer",
     date: "November 18, 2026", readTime: "6 min read", author: "Global Health Sphere Editorial Team",
     image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=85",
     excerpt: "A practical look at movement, food choices, sleep and preventive check-ups that support cardiovascular wellbeing.",
@@ -92,7 +95,7 @@ export const articles = [
   },
   {
     id: 2, slug: "cancer-screening-awareness", title: "Why Cancer Screening Awareness Matters Across Communities",
-    category: "Cancer & Oncology", categorySlug: "cancer", country: "Global", format: "Patient Awareness",
+    category: "Cancer & Oncology", categorySlug: "cancer", categorySlugs: ["cancer"], country: "Global", sourceTypes: ["Global", "Public"], tags: ["Cancer screening", "Cancer types", "Prevention", "Public health", "Treatment explainers"], format: "Patient Awareness",
     date: "November 14, 2026", readTime: "7 min read", author: "Editorial Team",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=85",
     excerpt: "Screening programmes differ by cancer type, age and country. Understand the questions to discuss with a care team.",
@@ -100,7 +103,7 @@ export const articles = [
   },
   {
     id: 3, slug: "maternal-health-community-care", title: "Maternal Health and the Value of Connected Community Care",
-    category: "Women's Health", categorySlug: "womens-health", country: "Kenya", format: "Global Perspective",
+    category: "Women's Health", categorySlug: "womens-health", categorySlugs: ["womens-health"], country: "Kenya", sourceTypes: ["Public"], tags: ["Pregnancy", "Fertility", "Maternal health", "Community care", "Reproductive health"], format: "Global Perspective",
     date: "November 12, 2026", readTime: "5 min read", author: "Editorial Team",
     image: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1200&q=85",
     excerpt: "How information, antenatal support and timely referral can contribute to safer pregnancy journeys.",
@@ -108,7 +111,7 @@ export const articles = [
   },
   {
     id: 4, slug: "mental-wellbeing-and-sleep", title: "Mental Wellbeing, Stress and the Role of Healthy Sleep",
-    category: "Mental Health", categorySlug: "mental-health", country: "Global", format: "Wellness",
+    category: "Mental Health", categorySlug: "mental-health", categorySlugs: ["mental-health"], country: "Global", sourceTypes: ["Global"], tags: ["Stress", "Sleep wellbeing", "Emotional health", "Anxiety", "Healthy living"], format: "Wellness",
     date: "November 10, 2026", readTime: "6 min read", author: "Editorial Team",
     image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=85",
     excerpt: "Explore the relationship between rest, daily routines, stress and emotional wellbeing.",
@@ -116,7 +119,7 @@ export const articles = [
   },
   {
     id: 5, slug: "medical-ai-research-explained", title: "Medical AI Explained: Opportunities, Evidence and Limitations",
-    category: "Medical Research & Innovation", categorySlug: "medical-research", country: "Global", format: "Research Explained",
+    category: "Medical Research & Innovation", categorySlug: "medical-research", categorySlugs: ["medical-research"], country: "Global", sourceTypes: ["Global"], tags: ["Artificial intelligence", "Medical technology", "Clinical research", "New discoveries", "Research explained"], format: "Research Explained",
     date: "November 08, 2026", readTime: "9 min read", author: "Editorial Team",
     image: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1200&q=85",
     excerpt: "A reader-friendly introduction to how artificial intelligence is being studied in healthcare.",
